@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import {Text, View, TextInput, StyleSheet, Alert} from 'react-native';
-import { Button } from '@rneui/themed';
+import {Text, View, TextInput, StyleSheet, Alert, Button} from 'react-native';
 import FirestoreStorage from '../libraries/FirestoreStorage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,6 +12,7 @@ export default function WelcomeScreen(props) {
     const [usernameEntry, changeUsernameEntry] = React.useState("")
     const [userNames, setUserNames] = React.useState([])
     const [clients, setClients] = React.useState([])
+    const [emailSubmitError, setEmailSubmitError] = React.useState(false)
 
     useEffect(() => {
         async function fetchUsername() {
@@ -60,9 +60,11 @@ export default function WelcomeScreen(props) {
             Alert.alert('Login Error', "We couldn't find your username, please double-check that it's the correct email or speak to your coach.", [
                 {text: 'OK', onPress: () => console.log('OK Pressed')},
               ]);
+            setEmailSubmitError(true)
         }
         else {
             setClientUsername(usernameEntry)
+            setEmailSubmitError(false)
             AsyncStorage.setItem('email', usernameEntry)
             changeUsernameEntry("")
         }
@@ -84,33 +86,35 @@ export default function WelcomeScreen(props) {
             {clientUsername != "" ? (
                 <View>
                     <Text>Welcome back {clientFirstName}! Select which workout you're doing today.</Text>
-                    <Button
-                        color="#228B22"
-                        style={styles.dayButton} 
-                        title='Day 1'
-                        onPress={() => goToDay(0)} />
-                    <Button
-                        color="#228B22"
-                        style={styles.dayButton} 
-                        title='Day 2'
-                        onPress={() => goToDay(1)} />
-                    <Button
-                        color="#228B22"
-                        style={styles.dayButton} 
-                        title='Day 3' 
-                        onPress={() => goToDay(2)}/>
-                    <Button
-                        buttonStyle={{
-                            borderColor: "#228B22",
-                        }}
-                        titleStyle={{ color: "#228B22" }}
-                        type="outline"
-                        style={styles.dayButton} 
-                        title='Switch User'
-                        onPress={switchUser}/>
+                    <View style={styles.dayButton}>
+                        <Button
+                            color="#228B22"
+                            title='Day 1'
+                            onPress={() => goToDay(0)} />
+                    </View>
+                    <View style={styles.dayButton}>
+                        <Button
+                            color="#228B22"
+                            title='Day 2'
+                            onPress={() => goToDay(1)} />
+                    </View>
+                    <View style={styles.dayButton}>
+                        <Button
+                            color="#228B22"
+                            title='Day 3' 
+                            onPress={() => goToDay(2)}/>
+                    </View>
+                    <View style={styles.submitButton}>
+                        <Button
+                            color="#228B22"
+                            title='Switch User'
+                            onPress={switchUser}>
+                            <Text style={styles.submitButton}>Switch User</Text>
+                        </Button>
+                    </View>
                 </View>
             ) : (
-                <View>
+                <View style={styles.dayButton}>
                     <Text>Welcome! Please enter your username. This should be the email you signed up for Cully Strength with.</Text>
                     <TextInput
                         onChangeText={changeUsernameEntry}
@@ -120,6 +124,11 @@ export default function WelcomeScreen(props) {
                         title='Submit'
                         color="#228B22"
                         onPress={submitUsername}/>
+                    {emailSubmitError == true ? (
+                        <Text>We couldn't find your username, please double-check that it's the correct email or speak to your coach.</Text>
+                    ) : (
+                        <View></View>
+                    )}
                 </View>
             )}
         </View>
@@ -135,6 +144,10 @@ const styles = StyleSheet.create({
     },
     dayButton: {
         marginTop: 10,
+    },
+    submitButton: {
+        marginTop: 10,
+        color: "#228B22"
     },
     screen: {
         margin: 10

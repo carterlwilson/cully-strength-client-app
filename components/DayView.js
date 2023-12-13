@@ -15,7 +15,6 @@ export default function DayView(props) {
     }
 
     useEffect( () => {
-        console.log('clientUserNameDay', props.route.params.clientUsername)
         async function fetchSchedulesAndIterations() {
             let schedules = await FirestoreStorage.getSchedules()
             let day = props.route.params.dayNumber
@@ -26,8 +25,6 @@ export default function DayView(props) {
                 block: block,
                 week: week
             })
-            console.log(block)
-            console.log(week)
             let exercises = schedule?.Blocks[block]?.Weeks[week]?.Days[day]?.Exercises
             let maxes = props.route.params.client.maxes
             let maxDict = {}
@@ -40,12 +37,13 @@ export default function DayView(props) {
             let exerciseList = []
             exercises?.forEach(exercise => {
                 let exerciseName = normalizeName(exercise.Name)
+                let maxName = normalizeName(exercise.MaxReference)
                 let listExercise = {}
                 listExercise['name'] = exerciseName
                 listExercise['rawName'] = exercise.Name
                 listExercise['type'] = exercise.Type
-                if (maxDict[exerciseName] != null) {
-                    listExercise['weight'] = Math.round(exercise.Multiplier * maxDict[exerciseName])
+                if (maxDict[maxName] != null) {
+                    listExercise['weight'] = Math.round(exercise.Multiplier * maxDict[maxName])
                 }
                 else {
                     listExercise['weight'] = "no max"
@@ -56,9 +54,10 @@ export default function DayView(props) {
             })
             const primaryExerciseList = exerciseList.filter(ex => ex.type == 1)
             const accessoryExerciseList = exerciseList.filter(ex => ex.type == 2)
+
+            console.log("id", accessoryExerciseList[0])
             setExercisePrimaryList(primaryExerciseList)
             setExerciseAccesoryList(accessoryExerciseList)
-            console.log('exes', primaryExerciseList)
         }
         fetchSchedulesAndIterations()
     }, [])
@@ -121,13 +120,13 @@ export default function DayView(props) {
                     ListHeaderComponent={<SectionTitle text="Primary"/>}
                     data={exercisePrimaryList}
                     renderItem={({item}, index) => <RenderedExercise exercise={item}/>}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => {return item.name}}
                 />
                 <FlatList
                     ListHeaderComponent={<SectionTitle text="Accessories"/>}
                     data={exerciseAccessoryList}
                     renderItem={({item}, index) => <RenderedExercise exercise={item}/>}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => {return item.name}}
                 />
             </View>
         </SafeAreaView>

@@ -19,7 +19,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.anonymous.cullystrengthapp"
+      "bundleIdentifier": "com.cullystrength.cullystrength"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7d41ae20-c2b0-4460-a684-21b2c586e591"
+      }
     }
   }
 }
