@@ -21,6 +21,7 @@ export default function DayView(props) {
             let schedule = getScheduleFromId(props.route.params.client.scheduleId, schedules)
             let block = schedule.CurrentBlock
             let week = schedule.CurrentWeek
+            console.log('block', block)
             setIterations({
                 block: block,
                 week: week
@@ -111,8 +112,8 @@ export default function DayView(props) {
     return(
         <SafeAreaView>
             <View style={styles.iterations}>
-                <Text>Block: {iterations.Block}</Text>
-                <Text>Week: {iterations.Week}</Text>
+                <Text>Block: {iterations.block + 1}</Text>
+                <Text>Week: {iterations.week + 1}</Text>
                 <Text>Day: {props.route.params.dayNumber + 1}</Text>
             </View>
             <View>
