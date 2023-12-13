@@ -10,14 +10,14 @@ import { getFirestore } from 'firebase/firestore'
 
 // Initialize Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBoQT4L3shuLfXGgQeQKR6jv2V0zA-Xnk0",
-    authDomain: "cullyfitness.firebaseapp.com",
-    databaseURL: "https://cullyfitness-default-rtdb.firebaseio.com",
-    projectId: "cullyfitness",
-    storageBucket: "cullyfitness.appspot.com",
-    messagingSenderId: "247341957335",
-    appId: "1:247341957335:web:2bc8166677cbf02fe5f092"
-  };
+  apiKey: "AIzaSyCfDq2attDqWMrxVXrJxLtFdP3rSXTZFXo",
+  authDomain: "cully-strength.firebaseapp.com",
+  projectId: "cully-strength",
+  storageBucket: "cully-strength.appspot.com",
+  messagingSenderId: "374950825055",
+  appId: "1:374950825055:web:c6452a92677096d8bd1fea",
+  measurementId: "G-R739SFTWWT"
+};
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);

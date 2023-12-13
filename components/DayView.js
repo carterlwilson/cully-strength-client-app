@@ -11,6 +11,8 @@ export default function DayView(props) {
     const [iterations, setIterations] = useState({})
 
     const getScheduleFromId = (id, schedules) => {
+        console.log('id', id)
+        console.log('schedules', schedules)
         return schedules.find(s => s.Id == id)
     }
 
@@ -21,7 +23,7 @@ export default function DayView(props) {
             let schedule = getScheduleFromId(props.route.params.client.scheduleId, schedules)
             let block = schedule.CurrentBlock
             let week = schedule.CurrentWeek
-            console.log('block', block)
+            console.log('client', props.route.params.client)
             setIterations({
                 block: block,
                 week: week

@@ -56,6 +56,7 @@ export default function WelcomeScreen(props) {
 
     const submitUsername = async () => {
         await fetchClients()
+        console.log('usernames', userNames)
         if (!userNames.includes(usernameEntry.toLowerCase())) {
             Alert.alert('Login Error', "We couldn't find your username, please double-check that it's the correct email or speak to your coach.", [
                 {text: 'OK', onPress: () => console.log('OK Pressed')},
