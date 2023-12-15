@@ -21,6 +21,7 @@ export default function WelcomeScreen(props) {
             if (username) setClientUsername(username)
         }
         fetchUsername()
+        fetchClients()
     }, [])
 
     useEffect(() => {
