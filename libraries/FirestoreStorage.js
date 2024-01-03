@@ -24,7 +24,19 @@ export default class FirestoreStorage {
         }
     }
 
+    static async getSchedule(id) {
+        const docRef = doc(db, "Schedules", id)
+        const docSnap = await getDoc(docRef)
+
+        if (docSnap.exists()) {
+            return docSnap.data()
+        } else {
+            console.log("No such document!")
+        }
+    }
+
     static async getSchedules() {
+        console.log('getting schedules')
         const schedules = []
         const querySnapshot = await getDocs(collection(db, "Schedules"));
         querySnapshot.forEach((doc) => {
