@@ -18,9 +18,8 @@ export default function DayView(props) {
 
     useEffect( () => {
         async function fetchSchedulesAndIterations() {
-            let schedules = await FirestoreStorage.getSchedules()
+            let schedule = await FirestoreStorage.getSchedule(props.route.params.client.scheduleId)
             let day = props.route.params.dayNumber
-            let schedule = getScheduleFromId(props.route.params.client.scheduleId, schedules)
             let block = schedule.CurrentBlock
             let week = schedule.CurrentWeek
             console.log('client', props.route.params.client)
