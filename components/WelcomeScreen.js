@@ -28,6 +28,7 @@ export default function WelcomeScreen(props) {
         const names = []
         let fetchedClients = []
         async function fetchClients() {
+            console.log('fetching clients')
             fetchedClients = await FirestoreStorage.getClients()
             setClients(fetchedClients)
             fetchedClients.forEach(client => {
@@ -47,6 +48,7 @@ export default function WelcomeScreen(props) {
 
     const fetchClients = async () => {
         let names = []
+        console.log('fetching clients 2')
         let fetchedClients = await FirestoreStorage.getClients()
         setClients(fetchedClients)
         fetchedClients.forEach(client => {
