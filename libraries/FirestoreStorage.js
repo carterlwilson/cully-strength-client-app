@@ -1,14 +1,27 @@
 import db from "../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, getDocs, doc, getDoc } from "firebase/firestore"; 
 
 export default class FirestoreStorage {
     static async getClients() {
         const clients = []
         const querySnapshot = await getDocs(collection(db, "ClientsV2"));
         querySnapshot.forEach((doc) => {
-            clients.push(doc.data())
+            let newClient = doc.data()
+            newClient.id = doc.id
+            clients.push(newClient)
         })
         return clients
+    }
+
+    static async getClent(id) {
+        const docRef = doc(db, "ClientsV2", id)
+        const docSnap = await getDoc(docRef)
+
+        if (docSnap.exists()) {
+            return docSnap.data()
+        } else {
+            console.log("No such document!")
+        }
     }
 
     static async getSchedules() {
