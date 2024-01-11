@@ -4,6 +4,7 @@ import {Text, View, TextInput, StyleSheet, Alert, Button} from 'react-native';
 import FirestoreStorage from '../libraries/FirestoreStorage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TouchableOpacity } from 'react-native-web';
 
 export default function WelcomeScreen(props) {
 
@@ -85,32 +86,34 @@ export default function WelcomeScreen(props) {
         <View style={styles.screen}>
             {(clientUsername != "" && clientId != "") ? (
                 <View>
-                    <Text>Welcome back {clientFirstName}! Select which workout you're doing today.</Text>
-                    <View style={styles.dayButton}>
-                        <Button
-                            color="#228B22"
-                            title='Day 1'
-                            onPress={() => goToDay(0)} />
+                    <Text style={styles.welcomeScreenText}>Welcome back {clientFirstName}! Select which workout you're doing today.</Text>
+                    <View style={{marginBottom: 10}}>
+                        <TouchableOpacity
+                            style={styles.dayButton}
+                            onPress={() => goToDay(0)}>
+                            <Text style={styles.dayButtonText}>DAY 1</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.dayButton}>
-                        <Button
-                            color="#228B22"
-                            title='Day 2'
-                            onPress={() => goToDay(1)} />
+                    <View style={{marginBottom: 10}}>
+                        <TouchableOpacity
+                            style={styles.dayButton}
+                            onPress={() => goToDay(1)}>
+                            <Text style={styles.dayButtonText}>DAY 2</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.dayButton}>
-                        <Button
-                            color="#228B22"
-                            title='Day 3' 
-                            onPress={() => goToDay(2)}/>
+                    <View style={{marginBottom: 10}}>
+                        <TouchableOpacity
+                            style={styles.dayButton}
+                            onPress={() => goToDay(2)}>
+                            <Text style={styles.dayButtonText}>DAY 3</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.submitButton}>
-                        <Button
-                            color="#228B22"
-                            title='Switch User'
+                        <TouchableOpacity
+                            style={styles.dayButton}
                             onPress={switchUser}>
-                            <Text style={styles.submitButton}>Switch User</Text>
-                        </Button>
+                            <Text style={styles.dayButtonText}>SWITCH USER</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             ) : (
@@ -143,7 +146,13 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     dayButton: {
-        marginTop: 10,
+        backgroundColor: "#228B22",
+        alignItems: 'center',
+        padding: 2,
+    },
+    dayButtonText: {
+        fontSize: 20,
+        color: 'white',
     },
     submitButton: {
         marginTop: 10,
@@ -151,5 +160,9 @@ const styles = StyleSheet.create({
     },
     screen: {
         margin: 10
+    },
+    welcomeScreenText: {
+        fontSize: 20,
+        marginBottom: 20
     }
   });
