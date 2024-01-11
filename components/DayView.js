@@ -72,14 +72,24 @@ export default function DayView(props) {
         iterations: {
             flexDirection: "row",
             justifyContent: "space-between",
-            margin: 10
+            margin: 10,
         },
         sectionTitleView: {
             flexDirection: "row",
             justifyContent: "center"
         },
         sectionTitle: {
-            fontWeight: "bold"
+            fontWeight: "bold",
+            fontSize: 25
+        },
+        exerciseText: {
+            fontSize: 20
+        },
+        exerciseCardTitle: {
+            fontSize: 22
+        },
+        iterationsText: {
+            fontSize: 20
         }
       });
 
@@ -91,11 +101,11 @@ export default function DayView(props) {
         return (
             <View>
                 <Card>
-                    <Card.Title>{exercise.rawName}</Card.Title>
+                    <Card.Title style={styles.exerciseCardTitle}>{exercise.rawName}</Card.Title>
                     <View style={styles.exerciseCardRow}>
-                        <Text>Sets: {exercise.sets}</Text>
-                        <Text>Reps: {exercise.reps}</Text>
-                        <Text>{exercise.weight} kgs</Text>
+                        <Text style={styles.exerciseText}>Sets: {exercise.sets}</Text>
+                        <Text style={styles.exerciseText}>Reps: {exercise.reps}</Text>
+                        <Text style={styles.exerciseText}>{exercise.weight} kgs</Text>
                     </View>
                 </Card>
             </View>
@@ -113,9 +123,9 @@ export default function DayView(props) {
     return(
         <SafeAreaView>
             <View style={styles.iterations}>
-                <Text>Block: {iterations.block + 1}</Text>
-                <Text>Week: {iterations.week + 1}</Text>
-                <Text>Day: {props.route.params.dayNumber + 1}</Text>
+                <Text style={styles.iterationsText}>Block: {iterations.block + 1}</Text>
+                <Text style={styles.iterationsText}>Week: {iterations.week + 1}</Text>
+                <Text style={styles.iterationsText}>Day: {props.route.params.dayNumber + 1}</Text>
             </View>
             <View>
                 <FlatList
