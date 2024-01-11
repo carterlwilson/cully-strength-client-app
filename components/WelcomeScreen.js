@@ -117,16 +117,19 @@ export default function WelcomeScreen(props) {
                     </View>
                 </View>
             ) : (
-                <View style={styles.dayButton}>
-                    <Text>Welcome! Please enter your username. This should be the email you signed up for Cully Strength with.</Text>
+                <View>
+                    <Text style={styles.signInScreenText}>Welcome! Please enter your username. This should be the email you signed up for Cully Strength with.</Text>
                     <TextInput
                         onChangeText={changeUsernameEntry}
                         value={usernameEntry}
                         style={styles.input}/>
-                    <Button 
-                        title='Submit'
-                        color="#228B22"
-                        onPress={submitUsername}/>
+                    <TouchableOpacity
+                        style={styles.dayButton}
+                        onPress={submitUsername}>
+                        <Text style={styles.dayButtonText}>
+                            SUBMIT
+                        </Text>
+                    </TouchableOpacity>
                     {emailSubmitError == true ? (
                         <Text>We couldn't find your username, please double-check that it's the correct email or speak to your coach.</Text>
                     ) : (
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
     dayButton: {
         backgroundColor: "#228B22",
         alignItems: 'center',
-        padding: 2,
+        padding: 5,
     },
     dayButtonText: {
         fontSize: 20,
@@ -164,5 +167,8 @@ const styles = StyleSheet.create({
     welcomeScreenText: {
         fontSize: 20,
         marginBottom: 20
+    },
+    signInScreenText: {
+        fontSize: 20
     }
   });
