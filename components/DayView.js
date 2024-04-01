@@ -32,7 +32,7 @@ export default function DayView(props) {
             let maxDict = {}
 
             maxes.forEach(max => {
-                let normalizedName = max.name.toLowerCase().replaceAll(' ', '')
+                let normalizedName = normalizeName(max.name)
                 maxDict[normalizedName] = max.weight
             });
 
@@ -57,7 +57,6 @@ export default function DayView(props) {
             const primaryExerciseList = exerciseList.filter(ex => ex.type == 1)
             const accessoryExerciseList = exerciseList.filter(ex => ex.type == 2)
 
-            console.log("id", accessoryExerciseList[0])
             setExercisePrimaryList(primaryExerciseList)
             setExerciseAccesoryList(accessoryExerciseList)
         }
@@ -132,13 +131,13 @@ export default function DayView(props) {
                     ListHeaderComponent={<SectionTitle text="Primary"/>}
                     data={exercisePrimaryList}
                     renderItem={({item}, index) => <RenderedExercise exercise={item}/>}
-                    keyExtractor={item => {return item.name}}
+                    keyExtractor = {(item, index) => `${index}`}
                 />
                 <FlatList
                     ListHeaderComponent={<SectionTitle text="Accessories"/>}
                     data={exerciseAccessoryList}
                     renderItem={({item}, index) => <RenderedExercise exercise={item}/>}
-                    keyExtractor={item => {return item.name}}
+                    keyExtractor = {(item, index) => `${index}`}
                 />
             </View>
         </SafeAreaView>
