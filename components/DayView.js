@@ -40,6 +40,8 @@ export default function DayView(props) {
             exercises?.forEach(exercise => {
                 let exerciseName = normalizeName(exercise.Name)
                 let maxName = normalizeName(exercise.MaxReference)
+                console.log('exerciseName', exerciseName)
+                console.log('max name', maxName)
                 let listExercise = {}
                 listExercise['name'] = exerciseName
                 listExercise['rawName'] = exercise.Name

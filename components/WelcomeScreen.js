@@ -53,6 +53,7 @@ export default function WelcomeScreen(props) {
         fetchedClients.forEach(client => {
             clientUsernames.push(client.email?.toLowerCase())
         })
+        console.log(clientUsernames)
         if (!clientUsernames.includes(usernameEntry.toLowerCase())) {
             Alert.alert('Login Error', "We couldn't find your username, please double-check that it's the correct email or speak to your coach.", [
                 {text: 'OK', onPress: () => console.log('OK Pressed')},
