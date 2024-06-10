@@ -82,6 +82,11 @@ export default function WelcomeScreen(props) {
         let client = await FirestoreStorage.getClent(clientId)
         props.navigation.navigate('DayView', {username: clientUsername, client: client, dayNumber: dayNumber})
     }
+
+    // navigate to url https://cullyfitnessadmin.com/ in browser 
+    const navigateToMaxes = () => {
+        window.open('https://cullyfitnessadmin.com/', '_blank')
+    }
     
     return(
         <View style={styles.screen}>
@@ -114,6 +119,13 @@ export default function WelcomeScreen(props) {
                             style={styles.dayButton}
                             onPress={switchUser}>
                             <Text style={styles.dayButtonText}>SWITCH USER</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.submitButton}>
+                        <TouchableOpacity
+                            style={styles.dayButton}
+                            onPress={navigateToMaxes}>
+                            <Text style={styles.dayButtonText}>RECORD MAXES</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
